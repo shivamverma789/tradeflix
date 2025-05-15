@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Charts - TradeView</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script type="text/javascript" src="https://s3.tradingview.com/tv.js"></script>
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="logo">TRADEFLIX</div>
+      <div class="hamburger" id="hamburger">
+        <div></div><div></div><div></div>
+      </div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="about.html"><i class="fas fa-info-circle"></i> About</a></li>
+        <li><a href="charts.html" class="active"><i class="fas fa-chart-line"></i> Charts</a></li>
+        <li><a href="#" id="logoutBtn" class="login-btn"><i class="fas fa-sign-out-alt"></i> <span id="userDisplay">Logout</span></a></li>
+        <li><button id="theme-toggle" class="theme-toggle"><i class="fas fa-moon"></i></button></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="chart-page fixed-height">
+    <div class="chart-layout">
+      <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+          <div class="sidebar-controls">
+            <h3>Markets</h3>
+            <button id="sidebarToggle" class="sidebar-toggle">
+              <i class="fas fa-chevron-left"></i>
+            </button>
+          </div>
+        </div>
+        
+        <div class="search-box">
+          <input type="text" id="marketSearch" placeholder="Search markets...">
+          <i class="fas fa-search"></i>
+        </div>
+        
+        <div class="market-categories">
+          <div class="market-category">
+            <div class="category-header" data-category="crypto">
+              <h4><i class="fab fa-bitcoin"></i> Cryptocurrency</h4>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="category-items active">
+              <button class="market-button" data-symbol="BINANCE:BTCUSDT">
+                <!-- <img src="https://placeholder.svg?height=20&width=20" alt="BTC"> -->
+                <span>Bitcoin (BTC/USDT)</span>
+              </button>
+              <button class="market-button" data-symbol="BINANCE:ETHUSDT">
+                <!-- <img src="https://placeholder.svg?height=20&width=20" alt="ETH"> -->
+                <span>Ethereum (ETH/USDT)</span>
+              </button>
+              <button class="market-button" data-symbol="BINANCE:XRPUSDT">
+                <!-- <img src="https://placeholder.svg?height=20&width=20" alt="XRP"> -->
+                <span>Ripple (XRP/USDT)</span>
+              </button>
+              <button class="market-button" data-symbol="BINANCE:DOGEUSDT">
+                <!-- <img src="https://placeholder.svg?height=20&width=20" alt="DOGE"> -->
+                <span>Dogecoin (DOGE/USDT)</span>
+              </button>
+              <button class="market-button" data-symbol="BINANCE:SOLUSDT">
+                <!-- <img src="https://placeholder.svg?height=20&width=20" alt="SOL"> -->
+                <span>Solana (SOL/USDT)</span>
+              </button>
+              <button class="market-button" data-symbol="BINANCE:ADAUSDT">
+                <!-- <img src="https://placeholder.svg?height=20&width=20" alt="ADA"> -->
+                <span>Cardano (ADA/USDT)</span>
+              </button>
+            </div>
+          </div>
+          
+          <div class="market-category">
+            <div class="category-header" data-category="forex">
+              <h4><i class="fas fa-dollar-sign"></i> Forex</h4>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="category-items">
+              <button class="market-button" data-symbol="FX:EURUSD">
+                <!-- <img src="https://placeholder.svg?height=20&width=20" alt="EUR/USD"> -->
+                <span>EUR/USD</span>
+              </button>
+              <button class="market-button" data-symbol="FX:GBPUSD">
+                <!-- <img src="https://placeholder.svg?height=20&width=20" alt="GBP/USD"> -->
+                <span>GBP/USD</span>
+              </button>
+              <button class="market-button" data-symbol="FX:USDJPY">
+                <!-- <img src="https://placeholder.svg?height=20&width=20" alt="USD/JPY"> -->
+                <span>USD/JPY</span>
+              </button>
+              <button class="market-button" data-symbol="FX:USDCAD">
+                <!-- <img src="https://placeholder.svg?height=20&width=20" alt="USD/CAD"> -->
+                <span>USD/CAD</span>
+              </button>
+              <button class="market-button" data-symbol="FX:AUDUSD">
+                <!-- <img src="https://placeholder.svg?height=20&width=20" alt="AUD/USD"> -->
+                <span>AUD/USD</span>
+              </button>
+              <button class="market-button" data-symbol="FX:NZDUSD">
+                <!-- <img src="https://placeholder.svg?height=20&width=20" alt="NZD/USD"> -->
+                <span>NZD/USD</span>
+              </button>
+            </div>
+          </div>
+          
+          <div class="market-category">
+            <div class="category-header" data-category="stocks">
+              <h4><i class="fas fa-chart-line"></i> Stocks</h4>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="category-items">
+              <button class="market-button" data-symbol="NASDAQ:AAPL">
+                <!-- <img src="https://placeholder.svg?height=20&width=20" alt="AAPL"> -->
+                <span>Apple (AAPL)</span>
+              </button>
+              <button class="market-button" data-symbol="NASDAQ:MSFT">
+                <!-- <img src="https://placeholder.svg?height=20&width=20" alt="MSFT"> -->
+                <span>Microsoft (MSFT)</span>
+              </button>
+              <button class="market-button" data-symbol="NASDAQ:GOOGL">
+                <!-- <img src="https://placeholder.svg?height=20&width=20" alt="GOOGL"> -->
+                <span>Google (GOOGL)</span>
+              </button>
+              <button class="market-button" data-symbol="NASDAQ:AMZN">
+                <!-- <img src="https://placeholder.svg?height=20&width=20" alt="AMZN"> -->
+                <span>Amazon (AMZN)</span>
+              </button>
+              <button class="market-button" data-symbol="NYSE:TSLA">
+                <!-- <img src="https://placeholder.svg?height=20&width=20" alt="TSLA"> -->
+                <span>Tesla (TSLA)</span>
+              </button>
+              <button class="market-button" data-symbol="NYSE:META">
+                <!-- <img src="https://placeholder.svg?height=20&width=20" alt="META"> -->
+                <span>Meta (META)</span>
+              </button>
+            </div>
+          </div>
+          
+          <div class="market-category">
+            <div class="category-header" data-category="indices">
+              <h4><i class="fas fa-globe"></i> Indices</h4>
+              <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="category-items">
+              <button class="market-button" data-symbol="FOREXCOM:SPXUSD">
+                <!-- <img src="https://placeholder.svg?height=20&width=20" alt="S&P 500"> -->
+                <span>S&P 500</span>
+              </button>
+              <button class="market-button" data-symbol="FOREXCOM:NSXUSD">
+                <!-- <img src="https://placeholder.svg?height=20&width=20" alt="Nasdaq"> -->
+                <span>Nasdaq</span>
+              </button>
+              <button class="market-button" data-symbol="FOREXCOM:DJI">
+                <!-- <img src="https://placeholder.svg?height=20&width=20" alt="Dow Jones"> -->
+                <span>Dow Jones</span>
+              </button>
+              <button class="market-button" data-symbol="INDEX:NKY">
+                <!-- <img src="https://placeholder.svg?height=20&width=20" alt="Nikkei"> -->
+                <span>Nikkei 225</span>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="sidebar-footer">
+          <div class="watchlist">
+            <h4><i class="fas fa-star"></i> Watchlist</h4>
+            <div id="watchlistItems" class="watchlist-items">
+              <p class="empty-watchlist">No items in watchlist</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="chart-content">
+        <div class="chart-header">
+          <div class="current-symbol">
+            <h2 id="currentSymbolName">Bitcoin (BTC/USDT)</h2>
+            <span id="currentSymbolCode">BINANCE:BTCUSDT</span>
+          </div>
+          
+          <div class="chart-controls">
+            <div class="interval-selector">
+              <button class="interval-btn active" data-interval="1">1m</button>
+              <button class="interval-btn" data-interval="5">5m</button>
+              <button class="interval-btn" data-interval="15">15m</button>
+              <button class="interval-btn" data-interval="60">1h</button>
+              <button class="interval-btn" data-interval="D">1d</button>
+              <button class="interval-btn" data-interval="W">1w</button>
+            </div>
+            
+            <div class="chart-actions">
+              <button id="addToWatchlist" class="action-btn">
+                <i class="far fa-star"></i>
+                <span>Add to Watchlist</span>
+              </button>
+              <button id="fullscreenBtn" class="action-btn">
+                <i class="fas fa-expand"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+        
+        <div class="chart-container">
+          <div id="tradingview_chart"></div>
+        </div>
+        
+      </div>
+    </div>
+  </main>
+
+  
+
+  <script src="script.js"></script>
+  <script>
+    // Auth check
+    document.addEventListener('DOMContentLoaded', () => {
+      if (!localStorage.getItem("loggedIn")) {
+        window.location.href = "login.html";
+      } else {
+        // Display username if available
+        const username = localStorage.getItem("username");
+        if (username) {
+          document.getElementById('userDisplay').textContent = username;
+        }
+      }
+    });
+    
+    // Logout functionality
+    document.getElementById('logoutBtn').addEventListener('click', (e) => {
+      e.preventDefault();
+      localStorage.removeItem("loggedIn");
+      localStorage.removeItem("username");
+      window.location.href = "login.html";
+    });
+    
+    // Get URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    let currentSymbol = urlParams.get('symbol') || 'BINANCE:BTCUSDT';
+    let currentInterval = '60'; // Default to 1h
+    
+    // TradingView Widget
+    let chartWidget;
+    
+    function loadChart(symbol, interval) {
+      document.getElementById("tradingview_chart").innerHTML = ""; // Clear previous
+      
+      chartWidget = new TradingView.widget({
+        container_id: "tradingview_chart",
+        symbol: symbol,
+        interval: interval,
+        timezone: "Etc/UTC",
+        theme: localStorage.getItem('theme') === 'light' ? "light" : "dark",
+        style: "1",
+        locale: "en",
+        toolbar_bg: "#f1f3f6",
+        enable_publishing: false,
+        hide_side_toolbar: false,
+        allow_symbol_change: false,
+        studies: ["RSI@tv-basicstudies", "MAExp@tv-basicstudies"],
+        fullscreen: false,
+        autosize: true,
+      });
+      
+      // Update current symbol display
+      updateSymbolDisplay(symbol);
+      
+      // Update URL without reloading
+      const url = new URL(window.location);
+      url.searchParams.set('symbol', symbol);
+      window.history.pushState({}, '', url);
+      
+      // Simulate fetching market data
+      fetchMarketData(symbol);
+      
+      // Update watchlist star
+      updateWatchlistButton(symbol);
+    }
+    
+    function updateSymbolDisplay(symbol) {
+      const symbolName = getSymbolName(symbol);
+      document.getElementById('currentSymbolName').textContent = symbolName;
+      document.getElementById('currentSymbolCode').textContent = symbol;
+    }
+    
+    function getSymbolName(symbol) {
+      // Map symbols to readable names
+      const symbolMap = {
+        'BINANCE:BTCUSDT': 'Bitcoin (BTC/USDT)',
+        'BINANCE:ETHUSDT': 'Ethereum (ETH/USDT)',
+        'BINANCE:XRPUSDT': 'Ripple (XRP/USDT)',
+        'BINANCE:DOGEUSDT': 'Dogecoin (DOGE/USDT)',
+        'BINANCE:SOLUSDT': 'Solana (SOL/USDT)',
+        'BINANCE:ADAUSDT': 'Cardano (ADA/USDT)',
+        'FX:EURUSD': 'EUR/USD',
+        'FX:GBPUSD': 'GBP/USD',
+        'FX:USDJPY': 'USD/JPY',
+        'FX:USDCAD': 'USD/CAD',
+        'FX:AUDUSD': 'AUD/USD',
+        'FX:NZDUSD': 'NZD/USD',
+        'NASDAQ:AAPL': 'Apple (AAPL)',
+        'NASDAQ:MSFT': 'Microsoft (MSFT)',
+        'NASDAQ:GOOGL': 'Google (GOOGL)',
+        'NASDAQ:AMZN': 'Amazon (AMZN)',
+        'NYSE:TSLA': 'Tesla (TSLA)',
+        'NYSE:META': 'Meta (META)',
+        'FOREXCOM:SPXUSD': 'S&P 500',
+        'FOREXCOM:NSXUSD': 'Nasdaq',
+        'FOREXCOM:DJI': 'Dow Jones',
+        'INDEX:NKY': 'Nikkei 225'
+      };
+      
+      return symbolMap[symbol] || symbol;
+    }
+    
+    // Simulate fetching market data
+    function fetchMarketData(symbol) {
+      // Show loading state
+      document.getElementById('marketCap').textContent = 'Loading...';
+      document.getElementById('volume').textContent = 'Loading...';
+      document.getElementById('change').textContent = 'Loading...';
+      
+      // Simulate API call delay
+      setTimeout(() => {
+        // Generate random data based on symbol type
+        let marketCap, volume, change;
+        
+        if (symbol.includes('BINANCE')) {
+          // Crypto
+          marketCap = `$${(Math.random() * 1000).toFixed(2)}B`;
+          volume = `$${(Math.random() * 50).toFixed(2)}B`;
+        } else if (symbol.includes('NASDAQ') || symbol.includes('NYSE')) {
+          // Stocks
+          marketCap = `$${(Math.random() * 2000).toFixed(2)}B`;
+          volume = `$${(Math.random() * 10).toFixed(2)}B`;
+        } else {
+          // Forex or Indices
+          marketCap = 'N/A';
+          volume = `$${(Math.random() * 100).toFixed(2)}B`;
+        }
+        
+        // Random change (-5% to +5%)
+        const changeValue = (Math.random() * 10 - 5).toFixed(2);
+        const isPositive = parseFloat(changeValue) >= 0;
+        change = `<span class="${isPositive ? 'positive' : 'negative'}">${isPositive ? '+' : ''}${changeValue}%</span>`;
+        
+        // Update UI
+        document.getElementById('marketCap').textContent = marketCap;
+        document.getElementById('volume').textContent = volume;
+        document.getElementById('change').innerHTML = change;
+      }, 1000);
+    }
+    
+    // Market buttons event listeners
+    document.querySelectorAll('.market-button').forEach(button => {
+      button.addEventListener('click', () => {
+        const symbol = button.getAttribute('data-symbol');
+        currentSymbol = symbol;
+        loadChart(symbol, currentInterval);
+      });
+    });
+    
+    // Interval buttons event listeners
+    document.querySelectorAll('.interval-btn').forEach(button => {
+      button.addEventListener('click', () => {
+        document.querySelectorAll('.interval-btn').forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+        
+        const interval = button.getAttribute('data-interval');
+        currentInterval = interval;
+        loadChart(currentSymbol, interval);
+      });
+    });
+    
+    // Category headers toggle
+    document.querySelectorAll('.category-header').forEach(header => {
+      header.addEventListener('click', () => {
+        const category = header.getAttribute('data-category');
+        const items = header.nextElementSibling;
+        
+        items.classList.toggle('active');
+        header.querySelector('i.fas').classList.toggle('fa-chevron-down');
+        header.querySelector('i.fas').classList.toggle('fa-chevron-right');
+      });
+    });
+    
+    // Sidebar toggle
+    document.getElementById('sidebarToggle').addEventListener('click', () => {
+      const sidebar = document.getElementById('sidebar');
+      sidebar.classList.toggle('collapsed');
+      
+      const icon = document.querySelector('#sidebarToggle i');
+      if (sidebar.classList.contains('collapsed')) {
+        icon.classList.remove('fa-chevron-left');
+        icon.classList.add('fa-chevron-right');
+      } else {
+        icon.classList.remove('fa-chevron-right');
+        icon.classList.add('fa-chevron-left');
+      }
+    });
+    
+    // Fullscreen button
+    document.getElementById('fullscreenBtn').addEventListener('click', () => {
+      const chartContainer = document.querySelector('.chart-container');
+      
+      if (document.fullscreenElement) {
+        document.exitFullscreen();
+      } else {
+        chartContainer.requestFullscreen();
+      }
+    });
+    
+    // Market search functionality
+    document.getElementById('marketSearch').addEventListener('input', (e) => {
+      const searchTerm = e.target.value.toLowerCase();
+      
+      document.querySelectorAll('.market-button').forEach(button => {
+        const symbolText = button.querySelector('span').textContent.toLowerCase();
+        const symbolCode = button.getAttribute('data-symbol').toLowerCase();
+        
+        if (symbolText.includes(searchTerm) || symbolCode.includes(searchTerm)) {
+          button.style.display = 'flex';
+          
+          // Ensure parent category is visible
+          const category = button.closest('.market-category');
+          const categoryItems = button.closest('.category-items');
+          
+          if (!categoryItems.classList.contains('active')) {
+            categoryItems.classList.add('active');
+            const header = category.querySelector('.category-header');
+            header.querySelector('i.fas').classList.remove('fa-chevron-right');
+            header.querySelector('i.fas').classList.add('fa-chevron-down');
+          }
+        } else {
+          button.style.display = 'none';
+        }
+      });
+    });
+    
+    // Watchlist functionality
+    function getWatchlist() {
+      const watchlist = localStorage.getItem('watchlist');
+      return watchlist ? JSON.parse(watchlist) : [];
+    }
+    
+    function saveWatchlist(watchlist) {
+      localStorage.setItem('watchlist', JSON.stringify(watchlist));
+    }
+    
+    function updateWatchlistDisplay() {
+      const watchlist = getWatchlist();
+      const watchlistContainer = document.getElementById('watchlistItems');
+      
+      if (watchlist.length === 0) {
+        watchlistContainer.innerHTML = '<p class="empty-watchlist">No items in watchlist</p>';
+        return;
+      }
+      
+      let html = '';
+      watchlist.forEach(item => {
+        html += `
+          <div class="watchlist-item" data-symbol="${item.symbol}">
+            <div class="watchlist-item-info">
+              <span>${item.name}</span>
+              <small>${item.symbol}</small>
+            </div>
+            <button class="remove-watchlist" data-symbol="${item.symbol}">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+        `;
+      });
+      
+      watchlistContainer.innerHTML = html;
+      
+      // Add click event to watchlist items
+      document.querySelectorAll('.watchlist-item').forEach(item => {
+        item.addEventListener('click', (e) => {
+          if (!e.target.closest('.remove-watchlist')) {
+            const symbol = item.getAttribute('data-symbol');
+            currentSymbol = symbol;
+            loadChart(symbol, currentInterval);
+          }
+        });
+      });
+      
+      // Add click event to remove buttons
+      document.querySelectorAll('.remove-watchlist').forEach(button => {
+        button.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const symbol = button.getAttribute('data-symbol');
+          removeFromWatchlist(symbol);
+        });
+      });
+    }
+    
+    function addToWatchlist(symbol, name) {
+      const watchlist = getWatchlist();
+      
+      // Check if already in watchlist
+      if (!watchlist.some(item => item.symbol === symbol)) {
+        watchlist.push({ symbol, name });
+        saveWatchlist(watchlist);
+        updateWatchlistDisplay();
+      }
+      
+      updateWatchlistButton(symbol);
+    }
+    
+    function removeFromWatchlist(symbol) {
+      const watchlist = getWatchlist();
+      const updatedWatchlist = watchlist.filter(item => item.symbol !== symbol);
+      saveWatchlist(updatedWatchlist);
+      updateWatchlistDisplay();
+      updateWatchlistButton(symbol);
+    }
+    
+    function isInWatchlist(symbol) {
+      const watchlist = getWatchlist();
+      return watchlist.some(item => item.symbol === symbol);
+    }
+    
+    function updateWatchlistButton(symbol) {
+      const watchlistBtn = document.getElementById('addToWatchlist');
+      const inWatchlist = isInWatchlist(symbol);
+      
+      if (inWatchlist) {
+        watchlistBtn.innerHTML = '<i class="fas fa-star"></i><span>Remove from Watchlist</span>';
+      } else {
+        watchlistBtn.innerHTML = '<i class="far fa-star"></i><span>Add to Watchlist</span>';
+      }
+    }
+    
+    document.getElementById('addToWatchlist').addEventListener('click', () => {
+      const symbol = currentSymbol;
+      const name = document.getElementById('currentSymbolName').textContent;
+      
+      if (isInWatchlist(symbol)) {
+        removeFromWatchlist(symbol);
+      } else {
+        addToWatchlist(symbol, name);
+      }
+    });
+    
+    // Initialize chart
+    document.addEventListener('DOMContentLoaded', () => {
+      loadChart(currentSymbol, currentInterval);
+      updateWatchlistDisplay();
+    });
+  </script>
+</body>
+</html>

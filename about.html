@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About - TradeView</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <header>
+    <nav class="navbar">
+      <div class="logo">TRADEFLIX</div>
+      <div class="hamburger" id="hamburger">
+        <div></div><div></div><div></div>
+      </div>
+      <ul class="nav-links" id="navLinks">
+        <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="about.html" class="active"><i class="fas fa-info-circle"></i> About</a></li>
+        <li><a href="charts.html"><i class="fas fa-chart-line"></i> Charts</a></li>
+        <li><a href="login.html" class="login-btn"><i class="fas fa-sign-in-alt"></i> Login</a></li>
+        <li><button id="theme-toggle" class="theme-toggle"><i class="fas fa-moon"></i></button></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="about-hero">
+      <div class="about-content">
+        <h1>About <span class="highlight">TradeView</span></h1>
+        <p class="subtitle">Your trusted partner for financial market analysis</p>
+      </div>
+    </section>
+
+    <section class="about-details">
+      <div class="about-card">
+        <h2>Our Mission</h2>
+        <p>TradeView is a demo project providing real-time TradingView widgets for educational purposes. Built with love using HTML, CSS, and JS.</p>
+        <p>Our mission is to make financial market data accessible to everyone, providing a simple yet powerful platform for traders and investors to analyze market trends and make informed decisions.</p>
+      </div>
+
+      <div class="about-card">
+        <h2>Our Features</h2>
+        <ul class="feature-list">
+          <li><i class="fas fa-check-circle"></i> Real-time market data from TradingView</li>
+          <li><i class="fas fa-check-circle"></i> Multiple market coverage (Crypto, Forex, Stocks)</li>
+          <li><i class="fas fa-check-circle"></i> Responsive design for all devices</li>
+          <li><i class="fas fa-check-circle"></i> User-friendly interface</li>
+          <li><i class="fas fa-check-circle"></i> Dark/Light mode toggle</li>
+        </ul>
+      </div>
+
+      <div class="about-card">
+        <h2>Our Team</h2>
+        <div class="team-grid">
+          <div class="team-member">
+            <img src="https://placeholder.svg?height=150&width=150" alt="Team Member">
+            <h3>John Doe</h3>
+            <p>Founder & Developer</p>
+          </div>
+          <div class="team-member">
+            <img src="https://placeholder.svg?height=150&width=150" alt="Team Member">
+            <h3>Jane Smith</h3>
+            <p>UI/UX Designer</p>
+          </div>
+          <div class="team-member">
+            <img src="https://placeholder.svg?height=150&width=150" alt="Team Member">
+            <h3>Mike Johnson</h3>
+            <p>Market Analyst</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact-section">
+      <h2>Get In Touch</h2>
+      <div class="contact-container">
+        <div class="contact-info">
+          <div class="contact-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <p>123 Trading Street, Market City, TC 12345</p>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-envelope"></i>
+            <p>info@tradeview.com</p>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-phone"></i>
+            <p>+1 (555) 123-4567</p>
+          </div>
+        </div>
+        <div class="contact-form">
+          <form id="contact-form">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" id="name" required>
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" required>
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="btn primary-btn">Send Message</button>
+          </form>
+          <div id="contact-message"></div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-logo">
+        <div class="logo">TRADEFLIX</div>
+        <p>Your one-stop platform for financial market analysis</p>
+      </div>
+      <div class="footer-links">
+        <h3>Quick Links</h3>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="charts.html">Charts</a></li>
+          <li><a href="login.html">Login</a></li>
+        </ul>
+      </div>
+      <div class="footer-contact">
+        <h3>Contact Us</h3>
+        <p><i class="fas fa-envelope"></i> info@tradeview.com</p>
+        <p><i class="fas fa-phone"></i> +1 (555) 123-4567</p>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-twitter"></i></a>
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-linkedin"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2023 TradeView. All rights reserved.</p>
+      <p>Disclaimer: This is a demo project for educational purposes only.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script>
+    document.getElementById('contact-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const message = document.getElementById('message').value;
+      
+      // Simulate form submission
+      const contactMessage = document.getElementById('contact-message');
+      contactMessage.innerHTML = `<div class="success-message">Thank you, ${name}! Your message has been sent successfully.</div>`;
+      
+      // Reset form
+      this.reset();
+      
+      // Clear success message after 5 seconds
+      setTimeout(() => {
+        contactMessage.innerHTML = '';
+      }, 5000);
+    });
+  </script>
+</body>
+</html>
