@@ -120,7 +120,7 @@
       </div>
       
       <div class="auth-info">
-        <h2>TradeView Premium</h2>
+        <h2>TradeFlix Premium</h2>
         <p>Get access to advanced features:</p>
         <ul>
           <li><i class="fas fa-check-circle"></i> Advanced Technical Indicators</li>
@@ -152,7 +152,7 @@
       </div>
       <div class="footer-contact">
         <h3>Contact Us</h3>
-        <p><i class="fas fa-envelope"></i> info@tradeview.com</p>
+        <p><i class="fas fa-envelope"></i> info@tradeflix.com</p>
         <p><i class="fas fa-phone"></i> +91 79878 40829</p>
         <div class="social-icons">
           <a href="#"><i class="fab fa-twitter"></i></a>
@@ -162,13 +162,34 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <p>&copy; 2025 TradeView. All rights reserved.</p>
+      <p>&copy; 2025 Tradeflix. All rights reserved.</p>
       <!-- <p>Disclaimer: This is a demo project for educational purposes only.</p> -->
     </div>
   </footer>
 
   <script src="script.js"></script>
   <script>
+    // User Management System
+    // Initialize users array from localStorage or create with default admin user
+    let users = JSON.parse(localStorage.getItem('users')) || [
+      { 
+        fullName: 'Admin User', 
+        email: 'admin@tradeflix.com', 
+        username: 'admin', 
+        password: '1234' 
+      }
+    ];
+    
+    // Save users to localStorage
+    function saveUsers() {
+      localStorage.setItem('users', JSON.stringify(users));
+    }
+    
+    // If no users in localStorage, save the default admin user
+    if (!localStorage.getItem('users')) {
+      saveUsers();
+    }
+    
     // Login Form Handling
     const loginForm = document.getElementById('loginForm');
     const loginMessage = document.getElementById('loginMessage');
@@ -177,16 +198,28 @@
       e.preventDefault();
       const username = document.getElementById('username').value;
       const password = document.getElementById('password').value;
+      const rememberMe = document.getElementById('remember').checked;
       
       // Show loading state
       loginMessage.innerHTML = '<div class="loading-message">Logging in...</div>';
       
       // Simulate API call with timeout
       setTimeout(() => {
-        // Dummy check
-        if (username === "admin" && password === "1234") {
+        // Find user in the users array
+        const user = users.find(u => u.username === username && u.password === password);
+        
+        if (user) {
+          // Store login state
           localStorage.setItem("loggedIn", "true");
           localStorage.setItem("username", username);
+          
+          // Store user data if remember me is checked
+          if (rememberMe) {
+            localStorage.setItem("rememberedUser", username);
+          } else {
+            localStorage.removeItem("rememberedUser");
+          }
+          
           loginMessage.innerHTML = '<div class="success-message">Login successful! Redirecting...</div>';
           
           setTimeout(() => {
@@ -219,8 +252,34 @@
         return;
       }
       
+      // Check if username already exists
+      if (users.some(user => user.username === username)) {
+        registerMessage.innerHTML = '<div class="error-message">Username already exists!</div>';
+        return;
+      }
+      
+      // Check if email already exists
+      if (users.some(user => user.email === email)) {
+        registerMessage.innerHTML = '<div class="error-message">Email already registered!</div>';
+        return;
+      }
+      
       // Simulate API call with timeout
       setTimeout(() => {
+        // Create new user object
+        const newUser = {
+          fullName,
+          email,
+          username,
+          password
+        };
+        
+        // Add to users array
+        users.push(newUser);
+        
+        // Save to localStorage
+        saveUsers();
+        
         registerMessage.innerHTML = '<div class="success-message">Account created successfully! You can now login.</div>';
         registerForm.reset();
         
@@ -280,6 +339,18 @@
         button.innerHTML = '<i class="fas fa-eye"></i>';
       }
     }
+    
+    // Auto-fill remembered username if available
+    window.addEventListener('DOMContentLoaded', () => {
+      const rememberedUser = localStorage.getItem('rememberedUser');
+      if (rememberedUser) {
+        document.getElementById('username').value = rememberedUser;
+        document.getElementById('remember').checked = true;
+      }
+    });
+    
+    // Display current users in console for debugging (remove in production)
+    console.log('Current users:', users);
   </script>
 </body>
 </html>
